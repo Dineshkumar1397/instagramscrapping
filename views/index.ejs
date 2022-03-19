@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheerio Instagram Scraping</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">
+            Instagram Profile Details Scraper
+        </h1>
+        <form autocomplete="off" action="/getinfo" method="post">
+            <div class="form-group">
+                <label for="username">Enter Instagram Username:</label>
+                <input type="text" name="username" required class="form-control">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-danger btn-block">
+                    Generate Profile Info
+                </button>
+            </div>
+        </form>
+
+        <%if(profile){%>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Username</th>
+                        <th>Followers</th>
+                        <th>Following</th>
+                        <th>Profile Picture</th>
+                        <th>Biography</th>
+                        <th>Number of Posts</th>
+                        <th>Verified Account</th>
+                        <th>Account URL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%=profile.full_name%></td>
+                        <td><%=profile.username%></td>
+                        <td><%=profile.edge_followed_by.count%></td>
+                        <td><%=profile.edge_follow.count%></td>
+                        <td><a target="_blank" href="<%=profile.profile_pic_url_hd%>">Profile Picture</a></td>
+                        <td><%=profile.biography%></td>
+                        <td><%=profile.edge_owner_to_timeline_media.count%></td>
+                        <td><%=profile.is_verified%></td>
+                        <td><a target="_blank" href="https://instagram.com/<%=profile.username%>"><%=profile.username%></a></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        <%}%>
+    </div>
+</body>
+</html>
